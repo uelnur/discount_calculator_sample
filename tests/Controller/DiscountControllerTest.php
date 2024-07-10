@@ -18,7 +18,8 @@ class DiscountControllerTest extends WebTestCase {
         $this->assertEquals(13, $responseData['discountPercent']);
         $this->assertCount(2, $responseData['discounts']);
 
-        $responseData = $this->makeRequest('100000', '', '2008-07-09', '');
+        $birthday = (new \DateTime())->modify('-13 year');
+        $responseData = $this->makeRequest('100000', '', $birthday->format('Y-m-d'), '');
         $this->assertResponseIsSuccessful();
         $this->assertEquals(90000, $responseData['finalPrice']);
         $this->assertEquals(10000, $responseData['discountedPrice']);
